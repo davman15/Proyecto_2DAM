@@ -1,5 +1,19 @@
-/*Aqui va estilos para el encabezado*/
+*{
+    box-sizing:border-box;
+}
 
+/*Aqui van los estilos para minimizar la barra */
+body::-webkit-scrollbar{
+    background-color: rgb(57, 59, 68,0.3);
+    width: 8px;
+
+}
+body::-webkit-scrollbar-thumb{
+    background: rgb(57, 59, 68,0.5);
+    border-radius: 5px;
+}
+
+/*Aqui va estilos para el encabezado*/
 .fondo-barra {
     background-color: #D7D7D7;
 }
@@ -8,11 +22,94 @@
     color: #19D3DA;
 }
 
+.opacidad{
+    background-color: rgba(57, 59, 68, 0.2);
+}
+
+@media(max-width:991px)
+{
+    .minimizado{
+        margin-top: 1vw;
+    }
+}
+
+/*Aqui va lo que va en medio*/
+.medio{
+   background-color: rgba(141, 147, 171, 1);
+   width: 100%;
+   height: auto;
+   display: flex;
+   justify-content: space-around;
+   flex-wrap: wrap;
+}
+
+.animado{
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.animadoIzquierda{
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.caja{
+    padding: 0px;
+    width: 30vw;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+
+.linea{
+    border-left: 6px solid white;
+    height: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.mostrarArriba{
+    animation: mostrarArriba 1s;
+    border: none;
+}
+
+.mostrarIzquierda{
+    animation: mostrarIzquierda 1s;
+    border: none;
+}
+
+.ponerAbajo{
+    margin-top: 50%;
+}
+
+/*Aqui con el translateX (-80) se moverá de izquierda a derecha
+Con el translateY(-80px) de arriba a abajo y si es positivo de abajo a arriba*/
+@keyframes mostrarArriba{
+    0%{
+        transform: translateX(-80px);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+@keyframes mostrarIzquierda{
+    0%{
+        transform: translateX(80px);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+
+
+
+
 
 /*Estilos para el carousel de fotos*/
-
 .slide img {
-    height: 96vh;
+    height: 100vh;
 }
 
 .carousel-caption {
@@ -24,173 +121,6 @@
     padding-bottom: 1vw;
     color: #fff;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(19, 7, 7, 0.5);
 }
 
-
-/*Esto es el footer*/
-
-.site-footer {
-    background-color: #26272b;
-    padding: 45px 0 20px;
-    font-size: 15px;
-    line-height: 24px;
-    color: white;
-}
-
-.site-footer hr {
-    border-top-color: #bbb;
-    opacity: 0.5
-}
-
-.site-footer hr.small {
-    margin: 20px 0
-}
-
-.site-footer h6 {
-    color: #fff;
-    font-size: 16px;
-    text-transform: uppercase;
-    margin-top: 5px;
-    letter-spacing: 2px
-}
-
-.site-footer a {
-    color: #737373;
-}
-
-.site-footer a:hover {
-    color: #3366cc;
-    text-decoration: none;
-}
-
-.footer-links {
-    padding-left: 0;
-    list-style: none
-}
-
-.footer-links li {
-    display: block
-}
-
-.footer-links a {
-    color: white
-}
-
-.footer-links a:active,
-.footer-links a:focus,
-.footer-links a:hover {
-    color: #3366cc;
-    text-decoration: none;
-}
-
-.footer-links.inline li {
-    display: inline-block
-}
-
-.site-footer .social-icons {
-    text-align: right
-}
-
-.site-footer .social-icons a {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    margin-left: 6px;
-    margin-right: 0;
-    border-radius: 100%;
-    background-color: #33353d
-}
-
-.copyright-text {
-    margin: 0
-}
-
-@media (max-width:991px) {
-    .site-footer [class^=col-] {
-        margin-bottom: 30px
-    }
-}
-
-@media (max-width:767px) {
-    .site-footer {
-        padding-bottom: 0
-    }
-    .site-footer .copyright-text,
-    .site-footer .social-icons {
-        text-align: center
-    }
-}
-
-.social-icons {
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none
-}
-
-.social-icons li {
-    display: inline-block;
-    margin-bottom: 4px
-}
-
-.social-icons li.title {
-    margin-right: 15px;
-    text-transform: uppercase;
-    color: #96a2b2;
-    font-weight: 700;
-    font-size: 13px
-}
-
-.social-icons a {
-    background-color: #eceeef;
-    color: white;
-    font-size: 16px;
-    display: inline-block;
-    line-height: 44px;
-    width: 44px;
-    height: 44px;
-    text-align: center;
-    margin-right: 8px;
-    border-radius: 100%;
-    -webkit-transition: all .2s linear;
-    -o-transition: all .2s linear;
-    transition: all .2s linear
-}
-
-.social-icons a:active,
-.social-icons a:focus,
-.social-icons a:hover {
-    color: white;
-    background-color: white
-}
-
-.social-icons.size-sm a {
-    line-height: 34px;
-    height: 34px;
-    width: 34px;
-    font-size: 14px
-}
-
-.social-icons a.facebook:hover {
-    background-color: #3b5998
-}
-
-.social-icons a.twitter:hover {
-    background-color: #00aced
-}
-
-.social-icons a.linkedin:hover {
-    background-color: #007bb6
-}
-
-.social-icons a.dribbble:hover {
-    background-color: #ea4c89
-}
-
-@media (max-width:767px) {
-    .social-icons li.title {
-        display: block;
-        margin-right: 0;
-        font-weight: 600
-    }
-}
