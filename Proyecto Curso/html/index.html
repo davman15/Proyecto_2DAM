@@ -22,7 +22,7 @@
 <body>
     <div class="">
         <!--NavBar de Inicio-->
-        <nav class="navbar navbar-expand-lg navbar-light navbar-nav-scroll opacidad "
+        <nav class="navbar navbar-expand-md navbar-dark navbar-nav-scroll opacidad "
             style=" position: absolute; z-index: 1; width: 100%;">
             <div class="container-fluid ">
                 <a class=" navbar-brand" href="index.html">
@@ -38,11 +38,17 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <!--En bootstrap5 para alinear a la derecha se utiliza la clase ms-auto-->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item " style="margin-right: 1px; ">
-                            <button id="boton" type="button" class="btn btn-outline-info">Iniciar Sesión</button>
+                        <li class="nav-item" style="margin-right: 1px; ">
+                            <div class="link-aparecidos">
+                                <a class="nav-link "  href="" >Iniciar Sesion</a>
+                            </div>
+                            <button id="botonIniciarSesion" type="button" class="btn btn-outline-info">Iniciar Sesión</button>
                         </li>
                         <li class="nav-item minimizado" style="margin-left: 1px;">
-                            <button type="button" class="btn btn-secondary ">Registrarse</button>
+                            <div class="link-aparecidos" >   
+                                <a class="nav-link"  href="" >Registrarse</a>
+                            </div>
+                            <button type="button" id="botonRegistrarse" class="btn btn-secondary ">Registrarse</button>
                         </li>
                     </ul>
                 </div>
