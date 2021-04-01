@@ -17,7 +17,7 @@
         <!--NavBar de Inicio-->
         <nav class="navbar navbar-expand-lg  me-auto  opacidad " style=" position: absolute; z-index: 1; width: 100%;">
             <div class="container-fluid ">
-                <a class=" navbar-brand" href="#">
+                <a class=" navbar-brand" href="index.html">
                     <img class="img-fluid" src="../img/AnimeZoneNegativo.png" alt="" width="160" height="50"
                         class="d-inline-block align-text-top">
                 </a>
@@ -31,10 +31,16 @@
                     <!--En bootstrap5 para alinear a la derecha se utiliza la clase ms-auto-->
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item " style="margin-right: 1px;">
+                            <div class="link-aparecidos">
+                                <a class="nav-link "  href="" >Iniciar Sesion</a>
+                            </div>
                             <button id="boton" type="button" class="btn btn-outline-info">Iniciar Sesión</button>
 
                         </li>
-                        <li class="nav-item" style="margin-left: 5px;">
+                        <li class="nav-item minimizado" style="margin-left: 5px;">
+                            <div class="link-aparecidos" >   
+                                <a class="nav-link"  href="" >Registrarse</a>
+                            </div>
                             <button type="button" class="btn btn-secondary ">Registrarse</button>
                         </li>
                     </ul>
@@ -47,7 +53,7 @@
     <div id="cajaPrincipal">
         <div id="cajaInicio">
             <h2 class="text-white pt-3">Iniciar Sesión</h2>
-            <form class="pt-5 px-4">
+            <form class="pt-5 px-5">
                 <div class="row">
                     <div class="col-4">
                         <label class="text-light">Nombre</label>
@@ -65,7 +71,7 @@
                     </div>
                     <div class="col pt-5">
                         <div class="centrarBoton">
-                            <input type="submit" value="Inciar Sesión" class="form-control w-auto btn btn-warning" />
+                            <input type="submit" value="Inciar Sesión" class="form-control w-auto btn btn-outline-warning" />
                         </div>
                             
                        
@@ -235,6 +241,10 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
+    <!--Script de Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
 
 
 </body>
