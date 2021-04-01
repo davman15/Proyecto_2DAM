@@ -14,40 +14,10 @@ body::-webkit-scrollbar-thumb{
 }
 
 /*Aqui va estilos para el encabezado*/
-.fondo-barra {
-    background-color: #D7D7D7;
-}
-
-.colorTexto {
-    color: #19D3DA;
-}
-
 .opacidad{
     background-color: rgba(57, 59, 68, 0.2);
 }
 
-/*Esto es para que por defecto siempre tenga los links invisibles*/
-.link-aparecidos{
-    display: none;
-}
-
-/*Cuando tenga 767.5px se minimizará y se aplicaran las siguientes clases*/
-@media(max-width:767.5px)
-{
-    .minimizado{
-        margin-top: 1vw;
-    }
-    
-    .link-aparecidos{
-        display: block;
-    }
-    #botonIniciarSesion{
-        display: none;
-    }
-    #botonRegistrarse{
-        display: none;
-    }
-}
 
 /*Aqui va lo que va en medio*/
 .medio{
