@@ -1,10 +1,69 @@
-/*Estilos del NavBar*/
-.opacidad{
-    background-color: rgba(57, 59, 68, 0.2);
-}
-
+/*Fondo de pantalla*/
 #fondo{
     width: 100%;
     height: 100%;
-    background-image:url("../img/kimi.jpg");
+    background-image:url("../img/calle.jpg");
 }
+/*Estilos del NavBar*/
+.opacidad{
+    background-color: rgba(57, 59, 68, 0.4);
+}
+
+.blanco{
+    color: white;
+}
+
+
+.ponerAbajo{
+    margin-top: 7%;
+}
+/*Estilos del scroll del navegador*/
+body::-webkit-scrollbar{
+    background-color: rgb(57, 59, 68,0.3);
+    width: 8px;
+    
+}
+body::-webkit-scrollbar-thumb{
+    background: rgb(57, 59, 68,0.5);
+    border-radius: 5px;
+}
+
+#cajaPrincipal{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cajaInicio{
+    text-align: center;
+    background-color: rgb(57, 59, 68,0.2);
+}
+
+.quitarLinea{
+    text-decoration: none;
+}
+
+.derecha{
+    padding-right: 2vw;
+}
+
+
+.centrarBoton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*Estilos para el scroll de navegacion*/
+body::-webkit-scrollbar{
+    background-color: rgb(57, 59, 68,0.3);
+    width: 8px;
+    
+}
+body::-webkit-scrollbar-thumb{
+    background: rgb(57, 59, 68,0.5);
+    border-radius: 5px;
+}
+
+

@@ -1,9 +1,12 @@
+/*Fondo de pantalla*/
 #fondo{
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image:url("../img/kimi.jpg");
+    background-image:url("../img/calle.jpg");
 }
+
+/*Estilos Barra de Navbar*/
 .opacidad{
     width: 100%;
    background-color: rgb(57, 59, 68,0.5); 
@@ -23,14 +26,13 @@
     background-color: rgb(57, 59, 68,0.2);
 }
 
-.arriba{
-    padding-top: 5px;
-}
+
 .centrarBoton{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+/*Estilos para el scroll de navegacion*/
 body::-webkit-scrollbar{
     background-color: rgb(57, 59, 68,0.3);
     width: 8px;
@@ -41,36 +43,6 @@ body::-webkit-scrollbar-thumb{
     border-radius: 5px;
 }
 
-/*Cuando la pantalla se minimize el cuadro de iniciar sesion se va ajustar al tamaño de la pantalla*/
-/*HORIZONTAL*/
-@media(min-width:1701px) and (max-width:1800px)
-{
-    #cajaInicio{
-        width: 27%;
-    }
-}
-
-/*Esto es para que por defecto siempre tenga los links invisibles*/
-.link-aparecidos{
-    display: none;
-}
-/*Cuando tenga 767.5px se minimizará y se aplicaran las siguientes clases*/
 
 
-@media only screen and(min-width:0px) and (max-width:991px) 
-{
-    .minimizado{
-        margin-top: 1vw;
-    }
-
-    .link-aparecidos{
-        display: block;
-    }
-    #botonIniciarSesion{
-        display: none;
-    }
-    #botonRegistrarse{
-        display: none;
-    }
-}
 
