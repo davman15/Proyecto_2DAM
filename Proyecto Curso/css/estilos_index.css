@@ -51,13 +51,34 @@ body::-webkit-scrollbar-thumb{
     margin-top: 50%;
     margin-bottom: 50%;
 }
-
+.caja3{
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 0;
+}
 
 .linea{
     border-left: 3px solid rgb(141, 147, 171,0.5);
     height: auto;
     margin-top: 5%;
     margin-bottom: 5%;
+}
+@media(max-width:720px) {
+    .linea{
+        display: none;
+    }
+    .caja3{
+        height: 10%;
+        display: block;
+    }
+    .caja{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .mostrarArriba{
@@ -79,6 +100,7 @@ body::-webkit-scrollbar-thumb{
 .ponerAbajoDerecha{
     margin-top: 55%;
 }
+
 
 /*Aqui con el translateX (-80) se moverá de izquierda a derecha
 Con el translateY(-80px) de arriba a abajo y si es positivo de abajo a arriba*/
