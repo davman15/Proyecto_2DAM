@@ -66,4 +66,14 @@ body::-webkit-scrollbar-thumb{
     border-radius: 5px;
 }
 
+label.error{
+    color: red;
+    display: block;
+}
 
+.desaparecer{
+    display: none;
+    margin-top: 1%;
+    font-weight: 600;
+    color: red;
+}
