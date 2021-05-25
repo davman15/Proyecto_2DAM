@@ -16,11 +16,11 @@ function validarUser() {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data().usuario);
-            console.log(doc.data().usuario," ", usuario);
+            console.log(doc.data().usuario, " ", usuario);
             if (doc.data().usuario == usuario) {
                 console.log("hoal");
                 usuarioExistente = true;
-                
+
             }
         });
         return usuarioExistente;
@@ -114,27 +114,38 @@ function registrarse() {
                     // Signed in
                     var user = userCredential.user;
                     // ...
-                    db.collection("usuarios").add({
-                        nombre: nombre,
+                    db.collection("Usuarios").doc(usuario).set({
+                        nombreUsuario: nombre,
                         apellidos: apellidos,
-                        usuario: usuario,
-                        email: email,
-                        contraseña: password
+                        usuarioId: usuario,
+                        correo: email,
+                        contrasena: password,
+                        imagen: 'https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/ImagenPerfilPorDefecto%2Fsinperfil.png?alt=media&token=79062551-4c24-45d7-9243-21030e6755b9'
                     })
                         .then((docRef) => {
-                            console.log("Document written with ID: ", docRef.id);
+                            console.log("Document written with ID: ");
+                            var user = firebase.auth().currentUser;
+
+                            user.updateProfile({
+                                displayName: usuario,
+                                photoURL: "https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/ImagenPerfilPorDefecto%2Fsinperfil.png?alt=media&token=79062551-4c24-45d7-9243-21030e6755b9"
+                            }).then(function () {
+                                // Update successful.
+                            }).catch(function (error) {
+                                // An error happened.
+                            });
                             firebase.auth().onAuthStateChanged((usuario) => {
                                 if (usuario) {
-                                  // User is signed in, see docs for a list of available properties
-                                  // https://firebase.google.com/docs/reference/js/firebase.User
-                                  console.log("echo");
-                                  var uid = usuario.uid;
-                                  // ...
+                                    // User is signed in, see docs for a list of available properties
+                                    // https://firebase.google.com/docs/reference/js/firebase.User
+                                    console.log("echo");
+                                    var uid = usuario.uid;
+                                    // ...
                                 } else {
-                                  // User is signed out
-                                  // ...
+                                    // User is signed out
+                                    // ...
                                 }
-                              });
+                            });
                             setTimeout("redirigir()", 2000);
                         })
                         .catch((error) => {
