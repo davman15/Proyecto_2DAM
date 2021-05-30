@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <!--bulma-->
-    
+
     <!-- Script validate-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
@@ -59,11 +59,11 @@
         }).catch((error) => {
             // An error happened.
         });*/
-        
+
 
     </script>
-    
-    
+
+
     <script src="../js/perfil.js"></script>
 </head>
 
@@ -123,7 +123,8 @@
                             <div class="row col-12">
                                 <div class="col-4 centrar">
                                     <div class="box">
-                                        <img id="imagenPerfil" class="rounded-circle"  style="width: 100%; height: 100%;" src="">
+                                        <img id="imagenPerfil" class="rounded-circle" style="width: 100%; height: 100%;"
+                                            src="">
                                     </div>
                                 </div>
                                 <div id="nomDesc" class="col-8">
@@ -144,27 +145,40 @@
 
             </div>
             <!--caja centro-->
-            <div id="cajaCentro" class="bg-warning m-4 col-7 centrar row">
-                <div class="col-12 bg-info text-center p-3"><h1>Publicaciones</h1></div>
+            <div id="cajaCentro" class="bg-warning m-4 col-6 centrar row">
+                <div class="col-12 bg-info text-center p-3">
+                    <h1>Publicaciones</h1>
+                </div>
                 <div id="pub" class="col-9 mt-5  bg-danger d-block">
                     <div class="container">
                         <div class="row">
                             <div id="fotos" class="h-auto col-12 bg-primary text-center row">
-                                
-                            </div> 
+
+                            </div>
                         </div>
                     </div>
-                   
+
                 </div>
-                
+
             </div>
             <!--caja derecha-->
-            <div id="cajaDerecha" class="bg-secondary m-4 col-2 row centrar">
-                <div class="h-25 w-25"></div>
+            <div id="cajaDerecha" class="bg-secondary m-4 col-3 row centrar">
+
+                <div class="container" style="padding-left: 0px;">
+                    <div class="row">
+                        <div class="col-12 bg-danger text-center">
+                            <h3>Tomodachi</h3>
+                        </div>
+                        <div class="col-12 bg-warning row" id="tomodachi">
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- Footer -->
             <div id="footer" class=" col-12">
-                
+
                 <footer class="bg-dark text-center text-white d-block">
                     <!-- Grid container -->
                     <div class="container p-4">
@@ -318,7 +332,7 @@
                     </div>
                     <!-- Copyright -->
                 </footer>
-                
+
             </div>
             <!-- Footer -->
         </div>
