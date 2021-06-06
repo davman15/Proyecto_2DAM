@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrarse</title>
-
+    <title>Top Anime</title>
     <!-- Script validate-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
@@ -19,15 +18,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
 
     
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!--TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/registrarse.css">
-
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -44,21 +34,25 @@
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
     </script>
-    
-    <script type="text/javascript" src="../js/firebase_Registro.js"></script>
+
+    <!--Link de Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <!--Estilos CSS de la pagina-->
+    <link rel="stylesheet" href="../css/topAnime.css">
 </head>
 
-
 <body id="fondo">
-    <!--NavBar de Inicio-->
     <div id="navbar">
-        <nav class="navbar navbar-expand-lg navbar-dark me-auto opacidad"
-            style=" position: absolute; z-index: 1; width: 100%;">
+        <!--NavBar de Inicio-->
+        <nav class="navbar navbar-expand-lg navbar-dark  me-auto  opacidad "
+            style=" position: absolute; z-index: 0; width: 100%;">
             <div class="container-fluid ">
                 <a class=" navbar-brand" href="index.html">
                     <img class="img-fluid" src="../img/AnimeZoneNegativo.png" alt="" width="160" height="50"
                         class="d-inline-block align-text-top">
                 </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -67,16 +61,9 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <!--En bootstrap5 para alinear a la derecha se utiliza la clase ms-auto-->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <div>
-                                <a href="" class="nav-link"> <button class="btn btn-outline-info">Iniciar
-                                        Sesion</button></a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <div>
-                                <a href="" class="nav-link"><button class="btn btn-danger">Cancelar
-                                        Registro</button></a>
+                        <li class="nav-item minimizado">
+                            <div class="mt-1">
+                                <a href="registrarse.html" class="nav-link"><button class="btn btn-secondary">Registrarse</button></a>
                             </div>
                         </li>
                     </ul>
@@ -84,98 +71,54 @@
             </div>
         </nav>
     </div>
-    
-    <!--Caja donde se encuentra la parte entre el navbar y el footer-->
-    <div id="cajaPrincipal" class="row">
-        <!--Esta caja es la contiene al contenido del formulario-->
-        <div id="cajaInicio" class="ponerAbajo mb-4 col-7 col-sm-6 col-md-5 col-lg-4 col-xl-3">
-            <div class="row opacidad">
-                <h2 class="text-white pt-3 pb-5 col-12">Registrarse</h2>
-                <form class="col" id="form" >
-                    <div class="row">
-                        <div class="col-4">
-                            <label class="text-light">Nombre</label>
+
+    <!--Div de busqueda-->
+    <div class=" centrarTodo d-inline-block" style="margin-top: 5%;">
+        <div class="h-100 row overflow-auto centrarTodo2">
+            <div class="col-2  h-auto " style="">
+                <div class="container mb-4 pb-2 sticky-top colorSecundario ">
+                    <div class="row centrar">
+                        <div class="col-12 centrarBoton mt-3">
+                            <h2 class="text-light">Buscador</h2>
                         </div>
-                        <div class="col-7">
-                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Introduce el nombre" required/>
-                            <div class="col-12 desaparecer" id="divNombre">
-                                <span>Este campo es obligatorio</span>
-                            </div>
+                        <div class="col-9 centrarBoton mt-4">
+                            <input class="w-100" type="text" id="inputAnimeBusqueda">
                         </div>
-                        
-                        <div class="col-4 pt-4">
-                            <label class="text-light">Apellidos</label>
-                        </div>
-                        <div class="col-7 pt-4">
-                            <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Introduce tus apellidos" required/>
-                            <div class="col-12 desaparecer" id="divApellidos" >
-                                <span>Este campo es obligatorio</span>
-                            </div>
-                        </div>
-                        <div class="col-4 pt-4">
-                            <label class="text-light">Correo</label>
-                        </div>
-                        <div class="col-7 pt-4">
-                            <input type="email" id="email" name="correo" class="form-control" placeholder="example@" required/>
-                            <div class="col-12 desaparecer" id="divEmail">
-                                <span>Este campo es obligatorio</span>
-                            </div>
-                        </div>
-                        <div class="col-4 pt-4">
-                            <label class="text-light">Usuario</label>
-                        </div>
-                        <div class="col-7 pt-4">
-                            <input type="text" id="usuario" name="usuario" class="form-control" placeholder="nombre de usuario" required/>
-                            <div class="col-12 desaparecer" id="divUsuario">
-                                <span>Este campo es obligatorio</span>
-                            </div>
-                        </div>
-                        <div class="col-4 pt-4">
-                            <label class="text-light">Sexo</label>
-                        </div>
-                        <div class="col-7 pt-4">
-                            <select name="sexo" id="sexo" class="form-select" required >
-                                <option></option>
-                                <option value="Hombre" id="hombre">Hombre</option>
-                                <option value="Mujer" id="mujer">Mujer</option>
-                            </select>
-                            <div class="col-12 desaparecer" id="divSexo">
-                                <span>Este campo es obligatorio</span>
-                            </div>
-                        </div>
-                        <div class="col-4 pt-4">
-                            <label class="text-light">Contraseña</label>
-                            
-                        </div>
-                        <div class="col-7 pt-4">
-                            <input type="password" id="password" name="contrasena" class="form-control" placeholder="**********" required/>
-                            <div class="col-12 desaparecer" id="divContrasena">
-                                <span>La contraseña debe contener mínimo 9 caracteres</span>
-                            </div>
-                            <div class="col-12 desaparecer" id="divContrasena2">
-                                <span>Las contraseñas no coinciden</span>
-                            </div>
-                        </div>
-                        <div class="col-4 pt-4">
-                            <label class="text-light">Repetir Contraseña</label>
-                        </div>
-                        <div class="col-7 pt-4">
-                            <input type="password" id="password2" name="repetirContrasena" class="form-control " placeholder="**********" required/>
-                        </div>
-                        <div class="col pt-5 pb-4">
-                            <div class="centrarBoton">
-                                <input type="button" value="Iniciar Sesión"
-                                    class="form-control w-auto btn btn-outline-warning" id="boton" onclick="registrarse()"/>
-                            </div>
-                        </div>
-                        <div class="col-12 pb-3">
-                            <a class="link-warning quitarLinea" href="iniciarSesion.html">Ya tengo cuenta</a>
+                        <div class="col-3 centrarBoton mt-4">
+                            <button class="btn btn-warning " onclick="buscarAnime()">Buscar</button>
                         </div>
                     </div>
-                </form>
+                </div>
+            </div>
+            <div class="col-6 bg-warning " style="margin-left: 20px; ">
+                <div clas="container" >
+                    <div class="row ">
+                        <div class="col-12 centrarBoton mb-4 mt-3">
+                            <h1 class="text-light">Animes</h1>
+                        </div>
+                        <div class="col-12 row" id="animesResultados">
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 " style="margin-left: 20px;">
+                <div class=" sticky-top">
+                    <div class="row colorSecundario">
+                        <div class="col-12 centrarBoton mt-3">
+                            <h1 class="text-light">Mi Top Animes</h1>
+                        </div>
+                        <div claass="col-12 centrar " id="miTop">
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-------------------------------------------->
     <!-- Footer -->
     <footer class="bg-dark text-center text-white">
         <!-- Grid container -->
@@ -332,7 +275,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
-
+        <script type="text/javascript" src="../js/TopAnimes.js"></script>
 </body>
 
 </html>

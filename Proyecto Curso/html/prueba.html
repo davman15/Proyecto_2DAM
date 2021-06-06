@@ -9,18 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-    <script>var contenidoOpinion=0;
-        function hola() {
-            
-            var div = document.createElement("div");
-            div.id = "divComent" + contenidoOpinion;
-            document.getElementById("prueba").appendChild(div);
-            const img = document.createElement("img");
-            img.src = "https://lenguajejs.com/assets/logo.svg";
-            img.style.width = "50px";
-            document.getElementById(div.id).appendChild(img);
-        }
-    </script>
+
+    <link rel="stylesheet" href="../VenoBox-master/venobox/venobox.css" type="text/css" media="screen" />
+
 </head>
 
 <body>
@@ -29,12 +20,19 @@
         <p id="hola">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ullam commodi, eum tempora modi
             necessitatibus mollitia, quis eos enim, magnam nemo doloremque tempore fugit similique. Nemo at blanditiis
             molestiae atque!</p>
-        <button onclick="hola()">hola</button>
+        <button onclick="random(1,5)">hola</button>
+
     </div>
+    <a class="venobox" href="../img/jujutsu.jpg"><img src="../img/jujutsu.jpg" alt="image alt" /></a>
+    <a class="venobox" data-overlay="rgba(95,164,255,0.8)" href="../html/prueba.html">.dfsfsdfsfsas..</a>
+    <a class="venobox" data-overlay="#ca294b" data-vbtype="inline" href="#inline-content">.sdadasdsad..</a>
 
 
 
-
+    <div id="inline-content" style="display:none; width: 10px; height: 10px;">
+        <input type="text">
+    </div>
+    <button onclick="hilos()">hoasla</button>
 
 
 
@@ -63,7 +61,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../VenoBox-master/venobox/venobox.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.venobox').venobox();
+function testAsync() {
+            return new Promise((resolve, reject) => {
+                //here our function should be implemented 
+                setTimeout(() => {
+                    console.log("Hello from inside the testAsync function");
+                    resolve();
+                    ;
+                }, 5000
+                );
+            });
+        }
 
+        async function callerFun() {
+            console.log("Caller");
+            await testAsync();
+            console.log("After waiting");
+        }
+
+        callerFun();
+        });
+        
+
+
+
+    </script>
 </body>
 
 </html>
