@@ -7,10 +7,12 @@ function buscarAnime() {
     var contador = 0;
     if (!(resultadoBuscar.value.length < 3)) {
         divTop.innerHTML = "";
+        
         var nombre = resultadoBuscar.value;
         $.get("https://api.jikan.moe/v3/search/anime", { q: nombre },
             function (responde) {
                 console.log(responde);
+                arrayArrays.length=0;;
                 responde.results.forEach((element, index) => {
                     var nombreRest = element.title;
                     var url = element.url;
