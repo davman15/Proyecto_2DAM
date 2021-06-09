@@ -53,3 +53,50 @@ body::-webkit-scrollbar-thumb{
     background: rgb(57, 59, 68,0.5);
     border-radius: 5px;
 }
+
+.chatBordes{
+    border-radius: 0px 87px 99px 122px;
+-moz-border-radius: 0px 87px 99px 122px;
+-webkit-border-radius: 0px 87px 99px 122px;
+border: 0px solid #000000;
+}
+.chatBordesD{
+    border-radius: 96px 0px 99px 122px;
+-moz-border-radius: 96px 0px 99px 122px;
+-webkit-border-radius: 96px 0px 99px 122px;
+border: 0px solid #000000;
+}
+
+.flexCajaChat{
+    display: flex;
+    align-content: flex-end;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+.scrollDiv{
+    overflow-x:hidden;
+}
+
+
+/*scroll modificado*/
+.scrollDiv::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.scrollDiv::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.scrollDiv::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.scrollDiv::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.scrollDiv::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
