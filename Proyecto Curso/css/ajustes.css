@@ -1,0 +1,121 @@
+/*Fondo de pantalla*/
+.fondo0{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("");
+    background-attachment: fixed;
+}
+.fondo{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fcalle.jpg?alt=media&token=83db268b-59d9-44ea-9723-6f45f2dc9df7");
+    background-attachment: fixed;
+}
+.fondo2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fspace.jpg?alt=media&token=bcd701fe-b968-4e6d-8f32-fecc3a18d0e6");
+    background-attachment: fixed;
+}
+.fondo3{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2FbarrioAbandonado.jpg?alt=media&token=17499d24-13a9-49bb-8904-58e000f3fe70");
+    background-attachment: fixed;
+}
+.fondo4{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fbarrio.jpg?alt=media&token=efa2b41c-4c8e-46ca-800a-3046ff306a34");
+    background-attachment: fixed;
+}
+.fondo5{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fatardecer.jpg?alt=media&token=b4c37afa-9635-4e54-a085-a1c6ac7f8600");
+    background-attachment: fixed;
+}
+.fondo6{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Ftemplo.jpg?alt=media&token=d4a7047b-1883-485d-a2dd-9adde4beb1cf");
+    background-attachment: fixed;
+}
+
+/*Caja principal del div de pestañas*/
+#cajaPrincipal,#centrarArea,#centrarImagen,#centrarHR, #centrarSelect,#centrarBoton{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#centrarImagen{
+    margin-left: 0% !important;
+}
+#cajaImagen{
+    background-color: #d6e0f0;
+    width: 40%;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#imagen{
+    width: 100%;
+    height: auto;
+}
+
+#caja1{
+    background-color: rgb(141, 147, 171,0.7);
+    border: 0cm;
+    width: 40%;
+    height: 80%;
+}
+
+
+.sinBorder{
+    border: 0;
+}
+.aumentar{
+    color: white !important;
+    text-align: center;
+    font-size: xx-large !important;
+    outline: none !important;
+
+}
+.legend{
+    color: white;
+    font-size: large;
+}
+.scroll{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.subir{
+    padding: 5px 10px;
+    background: #0275d8;
+    color:#fff;
+    border:0px solid #fff;
+}
+ 
+.subir:hover{
+    color:#fff;
+    background: #5bc0de;
+}

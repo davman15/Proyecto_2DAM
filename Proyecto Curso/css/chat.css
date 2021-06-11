@@ -74,16 +74,18 @@ border: 0px solid #000000;
     flex-wrap: wrap;
 }
 .scrollDiv{
+    overflow-y: scroll;
     overflow-x:hidden;
 }
-
-
-/*scroll modificado*/
-.scrollDiv::-webkit-scrollbar:vertical {
-    width:10px;
+.scrollDiv::-webkit-scrollbar {
+    -webkit-appearance: none;
 }
 
-.scrollDiv::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+.scrollDiv::-webkit-scrollbar:vertical {
+    width:4px;
+}
+
+.scrollDiv::-webkit-scrollbar-button:increment,.scrollDiv::-webkit-scrollbar-button {
     display: none;
 } 
 
@@ -94,9 +96,9 @@ border: 0px solid #000000;
 .scrollDiv::-webkit-scrollbar-thumb {
     background-color: #797979;
     border-radius: 20px;
-    border: 2px solid #f1f2f3;
 }
 
 .scrollDiv::-webkit-scrollbar-track {
     border-radius: 10px;  
 }
+
