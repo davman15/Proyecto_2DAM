@@ -2,7 +2,15 @@ $(document).ready(function () {
     console.log("hola");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            console.log(user);
+            var usuariosRef = db.collection('Usuarios');
+            var query = usuariosRef.where('usuarioId', '==', user.displayName)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        
+                        document.body.style.backgroundImage='url("'+doc.data().fondo+'")';
+                    });
+                });
         } else {
 
         }
@@ -75,3 +83,11 @@ function leerURL(input) {
     }
 }
 
+function cerrarSesion() {
+    firebase.auth().signOut().then(() => {
+        window.location.href = "index.html";
+        // Sign-out successful.
+    }).catch((error) => {
+        // An error happened.
+    });
+}

@@ -3,7 +3,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image:url("../img/calle.jpg");
+    background-attachment: fixed;
 }
 
 /*Estilos Barra de Navbar*/
@@ -84,4 +84,11 @@ body::-webkit-scrollbar-thumb{
 }
 .colorSecundario{
     background-color: #8d93ab;
+}
+.fondoAnime{
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Mangas%2Fanime_mashup.jpg?alt=media&token=489e61f2-193d-4c8f-9f0f-49b9a43e65ca%22");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+
 }

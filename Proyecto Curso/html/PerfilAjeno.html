@@ -61,7 +61,6 @@
             // An error happened.
         });*/
     </script>
-    <script src="../js/perfil.js"></script>
     <script src="../js/perfilAjeno.js"></script>
     <link rel="stylesheet" href="../VenoBox-master/venobox/venobox.css" type="text/css" media="screen" />
 </head>
@@ -119,7 +118,7 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="dropdown-item" href="ajustes.html">Configuración</a></li>
-                                        <li><a class="dropdown-item" href="index.html">Cerrar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -144,9 +143,9 @@
                             <div class="row col-12 w-100">
                                 <div class="row col-12">
                                     <div class="col-4 centrar">
-                                        <div class="box  mt-3" style="height: 75%; width: 75%;">
+                                        <div class="box  mt-3 centrar" style="height: 75%; width: 75%;">
                                             <img id="imagenPerfil" class="rounded-circle"
-                                                style="width: 100%; height: 100%;" src="">
+                                                style="width: 60%; height: 100%;" src="">
                                         </div>
                                     </div>
                                     <div id="nomDesc" class="col-8 mt-3 ">

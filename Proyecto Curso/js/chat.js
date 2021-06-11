@@ -1,4 +1,19 @@
 $(document).ready(function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            var usuariosRef = db.collection('Usuarios');
+            var query = usuariosRef.where('usuarioId', '==', user.displayName)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        
+                        document.body.style.backgroundImage='url("'+doc.data().fondo+'")';
+                    });
+                });
+        } else {
+
+        }
+    });
     var divLista = document.getElementById('ListaContactos');
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -44,9 +59,9 @@ $(document).ready(function () {
     });
 
 });
-function cerrarSesion(){
+function cerrarSesion() {
     firebase.auth().signOut().then(() => {
-        window.location.href="index.html";
+        window.location.href = "index.html";
         // Sign-out successful.
     }).catch((error) => {
         // An error happened.
@@ -68,7 +83,7 @@ function abrirChat(boton) {
                     querySnapshot.forEach((doc) => {
                         chatIndividual.style.display = "flex";
                         var contenido = '<div class="col-12 text-center" style="margin-left:0px; height:90%;"> ' +
-                            '<div class="col-12 bg-danger row">' +
+                            '<div class="col-12 color3 row p-2">' +
                             '<div class="col-3">' +
                             '<img style="width:50px; height:50px;" src="' + doc.data().imagen + '">' +
                             '</div>' +
@@ -93,9 +108,9 @@ function abrirChat(boton) {
                             '</div>' +
                             '</div>' +
                             '</div>' +
-                            '<div class="col-12 row centrarBoton bg-success h-100">' +
+                            '<div class="col-12 row centrarBoton color2 h-100">' +
                             '<div class="col-11 centrarBoton fondo row " style="height:80%;" >' +
-                            '<div class="scrollDiv col-12 bg-danger pt-3 h-100"  id="divIzquerda-' + doc.data().usuarioId + '">' +
+                            '<div class="scrollDiv col-12 pt-3 h-100"  id="divIzquerda-' + doc.data().usuarioId + '">' +
                             '</div>' +
                             '</div>' +
                             '<div class="col-11 row">' +
@@ -103,7 +118,7 @@ function abrirChat(boton) {
                             '<input type="text" class="form-control" id="input1+' + doc.data().usuarioId + '">' +
                             '</div>' +
                             '<div class="col-2">' +
-                            '<button id="btn2' + doc.data().usuarioId + '" class="btn btn-primary" onclick="añadirChat(this)">Enviar</button>' +
+                            '<button id="btn2' + doc.data().usuarioId + '" class="btn btn-warning" onclick="añadirChat(this)">Enviar</button>' +
                             '</div>' +
                             '</div>' +
                             '</div>' +
@@ -125,6 +140,7 @@ function abrirChat(boton) {
                                     MensajesRef = MensajesRef.doc(idsChats).collection('Mensajes');
                                     var query4 = MensajesRef.orderBy("fecha", "asc")
                                         .onSnapshot((querySnapshot) => {
+
                                             document.getElementById(IdDivAjeno).innerHTML = "";
                                             querySnapshot.forEach((doc) => {
 
@@ -146,13 +162,14 @@ function abrirChat(boton) {
                                                     document.getElementById(IdDivAjeno).insertAdjacentHTML("beforeend", MensajesPropios);
 
                                                 }
+
                                             });
 
                                             console.log(MensajesAjenos);
                                             console.log(MensajesPropios);
                                         });
                                 } else {
-
+                                    console.log("mal bro");
                                 }
                             });
                         })
@@ -171,198 +188,144 @@ function abrirChat(boton) {
 }
 
 function añadirChat(boton) {
-    idBot = boton.id + "";
-    var nombrePersonaAjena = idBot.substring(4);
-    var usuarios = new Array();
-    //console.log(nombrePersonaAjena);
-    var idInput = "input1+" + nombrePersonaAjena;
-    var inputChat = document.getElementById(idInput);
-    var chatRef = db.collection('chats');
-    if (!(inputChat.value.length == 0)) {
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                var idChat = user.displayName + "-" + nombrePersonaAjena;
-                var idChat2 = nombrePersonaAjena + '-' + user.displayName;
-                var fecha = new Date();
-                usuarios.length = 0;
-                usuarios.push(user.displayName);
-                usuarios.push(nombrePersonaAjena);
-                var query6 = chatRef.where("").orderBy('fechaChat', 'asc')
-                    .get()
-                    .then((querySnapshot) => {
-                        if (querySnapshot.empty) {
-                            console.log('Vacio');
-                            var chatsRef = db.collection('Usuarios').doc(user.displayName).collection('chats').doc(idChat).set({
-                                fechaChat: fecha,
-                                id: idChat,
-                                nombre: nombrePersonaAjena,
-                                usuarios: usuarios
-                            })
-                                .then(() => {
-                                    console.log("1");
-                                    var chat = db.collection('chats').doc(idChat).set({
-                                        fechaChat: fecha,
-                                        id: idChat,
-                                        nombre: nombrePersonaAjena,
-                                        usuarios: usuarios
-                                    })
-                                        .then(() => {
-                                            console.log("2");
-                                            console.log("Document successfully written!");
-                                            chatRef.doc(idChat).collection("Mensajes").add({
-                                                fecha: fecha,
-                                                from: user.displayName,
-                                                mensaje: inputChat.value
-                                            })
-                                                .then((docRef) => {
-                                                    console.log("Document written with ID: ", docRef.id);
-                                                    var idPer = 'divIzquerda-' + nombrePersonaAjena;
-                                                    document.getElementById(idPer).scrollTop = document.getElementById(idPer).scrollHeight;
-                                                    inputChat.innerHTML = "";
-                                                })
-                                                .catch((error) => {
-                                                    console.error("Error adding document: ", error);
-                                                });
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            console.log(boton.id);
+            //nos quedamos con el nombre del usuario con el que vamos a hablar
+            var idBot = boton.id;
+            var nomUsuarioHablar = idBot.substring(4);
+            var idSiVacio = user.displayName + '-' + nomUsuarioHablar;
+            var usuarios = new Array();
+            var idInput = "input1+" + nomUsuarioHablar;
+            var inputChat = document.getElementById(idInput);
+            var fecha = new Date();
+            var chatRef = db.collection('chats');
+            usuarios.length = 0;
+            usuarios.push(user.displayName);
+            usuarios.push(nomUsuarioHablar);
+            var query = chatRef.orderBy('fechaChat', 'asc')
+                .get()
+                .then((querySnapshot) => {
+                    //si esta vacio
+                    if (querySnapshot.empty) {
+                        console.log('vacio');
+                        chatRef.doc(idSiVacio).set({
+                            fechaChat: fecha,
+                            id: idSiVacio,
+                            nombre: nomUsuarioHablar,
+                            usuarios: usuarios
+                        })
+                            .then(() => {
+                                console.log("Document successfully written!1");
+                                chatRef.doc(idSiVacio).collection('Mensajes').add({
+                                    fecha: fecha,
+                                    from: user.displayName,
+                                    mensaje: inputChat.value
+                                })
+                                    .then((docRef) => {
+                                        console.log("Document written with ID: ", docRef.id);
+                                        var idPer = 'divIzquerda-' + nomUsuarioHablar;
+                                        document.getElementById(idPer).scrollTop = document.getElementById(idPer).scrollHeight;
+                                        inputChat.innerHTML = "";
+
+                                        //añadimos el mensaje a los usuarios
+                                        var usuariosRef = db.collection('Usuarios');
+
+                                        usuariosRef.doc(user.displayName).collection('chats').doc(idSiVacio).set({
+                                            fechaChat: fecha,
+                                            id: idSiVacio,
+                                            nombre: nomUsuarioHablar,
+                                            usuarios: usuarios
                                         })
-                                        .catch((error) => {
-                                            console.error("Error adding document: ", error);
-                                        });
+                                            .then(() => {
+                                                idSiVacio = nomUsuarioHablar + '-' + user.displayName;
+                                                usuarios.length = 0;
+                                                usuarios.push(nomUsuarioHablar);
+                                                usuarios.push(user.displayName);
 
-                                    
-
-                                    var usuariosRef = db.collection('Usuarios');
-                                    var query = usuariosRef.where("usuarioId", "==", nombrePersonaAjena)
-                                        .get()
-                                        .then((querySnapshot) => {
-                                            usuarios.length = 0;
-                                            console.log("3");
-                                            usuarios.push(nombrePersonaAjena);
-                                            usuarios.push(user.displayName);
-                                            querySnapshot.forEach((doc) => {
-                                                usuariosRef.doc(nombrePersonaAjena).collection('chats').doc(idChat2).set({
+                                                usuariosRef.doc(nomUsuarioHablar).collection('chats').doc(idSiVacio).set({
                                                     fechaChat: fecha,
-                                                    id: idChat2,
+                                                    id: idSiVacio,
                                                     nombre: user.displayName,
                                                     usuarios: usuarios
                                                 })
                                                     .then(() => {
-                                                        console.log("4");
                                                         console.log("Document successfully written!");
-                                                    })
-                                                    .catch((error) => {
-                                                        console.error("Error writing document: ", error);
                                                     });
-
                                             });
-                                        })
-                                        .catch((error) => {
-                                            console.log("Error getting documents: ", error);
-                                        });
-                                    console.log("Document successfully written!");
-                                })
-                                .catch((error) => {
-                                    console.error("Error writing document: ", error);
-                                });
+                                    });
 
-                        } else {
-                            querySnapshot.forEach((doc) => {
-                                console.log("sxdsadsads")
-                                var idschats = doc.id + "";
-                                if (idschats.includes(nombrePersonaAjena) == true && idschats.includes(user.displayName) == true) {
-                                    chatRef.doc(idschats).set({
-                                        fechaChat: fecha,
-                                        id: idschats,
-                                        nombre: nombrePersonaAjena,
-                                        usuarios: usuarios
-                                    })
-                                        .then(() => {
-                                            console.log("333")
-                                            console.log("Document successfully written!");
-                                            chatRef.doc(idschats).collection("Mensajes").add({
-                                                fecha: fecha,
-                                                from: user.displayName,
-                                                mensaje: inputChat.value
-                                            })
-                                                .then((docRef) => {
-                                                     console.log("4444")
-                                                    console.log("Document written with ID: ", docRef.id);
-                                                    var idPer = 'divIzquerda-' + nombrePersonaAjena;
-                                                    document.getElementById(idPer).scrollTop = document.getElementById(idPer).scrollHeight;
-                                                    inputChat.innerHTML = "";
-                                                })
-                                                .catch((error) => {
-                                                    console.error("Error adding document: ", error);
-                                                });
-                                        })
-                                        .catch((error) => {
-                                            console.error("Error writing document: ", error);
-                                        });
+                            });
+                    } else {
+                        var idschats2 = user.displayName + '-' + nomUsuarioHablar;
+                        querySnapshot.forEach((doc) => {
+                            var idschats = doc.id;
+                            
+                            if (idschats.includes(nomUsuarioHablar) == true && idschats.includes(user.displayName) == true) {
+                                var idschats3=user.displayName+'-';
+                                if(idschats.includes(user.displayName) == true){
+                                    
                                 }else{
-                                    chatRef.doc(idschats).set({
-                                        fechaChat: fecha,
-                                        id: idschats,
-                                        nombre: nombrePersonaAjena,
-                                        usuarios: usuarios
-                                    })
+                                    idschats2 = nomUsuarioHablar+ '-' +user.displayName;
+                                }
+                                chatRef.doc(idschats).set({
+                                    fechaChat: fecha,
+                                    id: idschats,
+                                    nombre: nomUsuarioHablar,
+                                    usuarios: usuarios
+                                })
                                     .then(() => {
-                                        console.log("else de si existe el chat")
-                                        console.log("Document successfully written!");
+                                        console.log("Document successfully written! creado si ya existia ");
                                         chatRef.doc(idschats).collection("Mensajes").add({
                                             fecha: fecha,
                                             from: user.displayName,
                                             mensaje: inputChat.value
                                         })
-                                        .then((docRef) => {
-                                            console.log("4444")
-                                           console.log("Document written with ID: ", docRef.id);
-                                           var idPer = 'divIzquerda-' + nombrePersonaAjena;
-                                           document.getElementById(idPer).scrollTop = document.getElementById(idPer).scrollHeight;
-                                           inputChat.innerHTML = "";
-                                       })
-                                       .catch((error) => {
-                                           console.error("Error adding document: ", error);
-                                       });
-                                    })
-                                    .catch((error) => {
-                                        console.error("Error writing document: ", error);
-                                    });
-                                }
-                            });
-                            var usuariosRef = db.collection('Usuarios');
-                                    var query = usuariosRef.where("usuarioId", "==", nombrePersonaAjena)
-                                        .get()
-                                        .then((querySnapshot) => {
-                                            usuarios.length = 0;
+                                            .then((docRef) => {
+                                                console.log("Document written with ID: ", docRef.id);
+                                                var idPer = 'divIzquerda-' + nomUsuarioHablar;
+                                                document.getElementById(idPer).scrollTop = document.getElementById(idPer).scrollHeight;
+                                                inputChat.innerHTML = "";
 
-                                            usuarios.push(nombrePersonaAjena);
-                                            usuarios.push(user.displayName);
-                                            querySnapshot.forEach((doc) => {
-                                                usuariosRef.doc(nombrePersonaAjena).collection('chats').doc(idChat2).set({
+                                                //añadimos el mensaje a los usuarios
+                                                var usuariosRef = db.collection('Usuarios');
+
+                                                usuariosRef.doc(user.displayName).collection('chats').doc(idschats).set({
                                                     fechaChat: fecha,
-                                                    id: idChat2,
-                                                    nombre: user.displayName,
+                                                    id: idschats,
+                                                    nombre: nomUsuarioHablar,
                                                     usuarios: usuarios
                                                 })
                                                     .then(() => {
-                                                        console.log("Document successfully written!");
-                                                    })
-                                                    .catch((error) => {
-                                                        console.error("Error writing document: ", error);
+                                                        idschats = nomUsuarioHablar + '-' + user.displayName;
+                                                        usuarios.length = 0;
+                                                        usuarios.push(nomUsuarioHablar);
+                                                        usuarios.push(user.displayName);
+
+                                                        usuariosRef.doc(nomUsuarioHablar).collection('chats').doc(idschats).set({
+                                                            fechaChat: fecha,
+                                                            id: idschats,
+                                                            nombre: user.displayName,
+                                                            usuarios: usuarios
+                                                        })
+                                                            .then(() => {
+                                                                console.log("Document successfully written!");
+                                                            });
                                                     });
-
                                             });
-                                        })
-                                        .catch((error) => {
-                                            console.log("Error getting documents: ", error);
-                                        });
-                        }
-                    });
+                                    });
+                            } else if(idschats.includes(nomUsuarioHablar) == false && idschats.includes(user.displayName) == false){
+                                
+                            }else if(idschats.includes(nomUsuarioHablar) == false && idschats.includes(user.displayName) == true){
+                                
+                            }else if(idschats.includes(nomUsuarioHablar) == true && idschats.includes(user.displayName) == true){
+                                
+                            }
+                        });
+                    }
+                });
+        }
+    });
 
-            } else {
-
-            }
-        });
-
-        console.log("conseguido");
-    }
 }

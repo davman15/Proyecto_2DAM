@@ -1,13 +1,19 @@
 var resultadoBuscar = document.getElementById("inputAnimeBusqueda");
 var divTop = document.getElementById("animesResultados");
+var contieneFondo=document.getElementById("contieneFondo");
+var otroFondo=document.getElementById("otroFondo");
+
 //.insertAdjacentHTML("beforeend", sad);
 var arrayArrays = new Array();
 var arrayArrays2 = new Array();
 function buscarAnime() {
     var contador = 0;
+    
     if (!(resultadoBuscar.value.length < 3)) {
         divTop.innerHTML = "";
-        
+        contieneFondo.style.backgroundImage="url('none')";
+        contieneFondo.style.backgroundColor="#ffc107";
+        otroFondo.style.backgroundColor="#ffc107";
         var nombre = resultadoBuscar.value;
         $.get("https://api.jikan.moe/v3/search/anime", { q: nombre },
             function (responde) {
@@ -59,11 +65,14 @@ function buscarAnime() {
                     contador++;
                 });
                 console.log(arrayArrays);
+                
             });
     }
+   
 }
 
 function añadirAnimeTop(boton) {
+    
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
 
@@ -83,11 +92,25 @@ function añadirAnimeTop(boton) {
     });
 }
 $(document).ready(function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            var usuariosRef = db.collection('Usuarios');
+            var query = usuariosRef.where('usuarioId', '==', user.displayName)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        
+                        document.body.style.backgroundImage='url("'+doc.data().fondo+'")';
+                    });
+                });
+        } else {
+
+        }
+    });
     var contador2 = 0;
     var miTop = document.getElementById("miTop");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-
             var usuarioRef = db.collection('Usuarios').doc(user.displayName).collection('TopAnime');
             var query = usuarioRef.orderBy('nombreAnime', 'desc')
                 .get()
@@ -144,5 +167,13 @@ function eliminar(boton) {
                 console.error("Error removing document: ", error);
             });
         }
+    });
+}
+function cerrarSesion() {
+    firebase.auth().signOut().then(() => {
+        window.location.href = "index.html";
+        // Sign-out successful.
+    }).catch((error) => {
+        // An error happened.
     });
 }

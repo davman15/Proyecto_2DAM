@@ -11,30 +11,108 @@ function buscarUsuario() {
         db.collection("Usuarios").orderBy('usuarioId', 'desc').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var nombre = usuarioBusqueda.value;
-                   var idMinuscula= doc.id.toLowerCase()
+                var idMinuscula = doc.id.toLowerCase()
                 if (doc.id.includes(nombre) || idMinuscula.includes(nombre.toLowerCase()) || doc.id.includes(nombre.toUpperCase())) {
                     var contenidoDiv = '<div class="col-2" style="display:flex; align-items:center;">' +
-                    '<img style="width:50px; height:50px;" class="ms-4" src="' + doc.data().imagen + '">' +
-                    '</div>' +
-                    '<div class="col-10 row">' +
-                    '<div class="col-6 centrarBoton">' +
-                    '<h4>' + doc.data().usuarioId + '</h4>' +
-                    '</div>' +
-                    '<div class="col-6 centrarBoton">' +
-                    '<button id="' + doc.data().usuarioId + '" onclick="abrirChat(this)" class="btn btn-success ms-auto">Ver Perfil</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="col-12">' +
-                    '<hr>' +
-                    '</div>';
+                        '<img style="width:50px; height:50px;" class="ms-4" src="' + doc.data().imagen + '">' +
+                        '</div>' +
+                        '<div class="col-10 row">' +
+                        '<div class="col-6 centrarBoton">' +
+                        '<h3>' + doc.data().usuarioId + '</h3>' +
+                        '</div>' +
+                        '<div class="col-6 centrarBoton">' +
+                        '<button id="' + doc.data().usuarioId + '"  class="btn btn-success ms-auto">Ver Perfil</button>' +
+                        '<button id="' + doc.data().usuarioId + '" onclick="seguir(this)" class="btn btn-dark ms-auto">Seguir</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-12">' +
+                        '<hr>' +
+                        '</div>';
                     divTop.insertAdjacentHTML("beforeend", contenidoDiv);
                 }
             });
         });
     }
 }
+function seguir(boton) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+
+            var usuariosRef = db.collection('Usuarios').doc(user.displayName).collection('Seguidos');
+
+            var query = usuariosRef.where("usuarioId", "==", boton.id)
+                .get()
+                .then((querySnapshot) => {
+                    if (querySnapshot.empty) {
+                        usuariosRef.doc(boton.id).set({
+                            usuarioId: boton.id
+                        })
+                            .then(() => {
+                                console.log("añadido correctamente a seguidos");
+                                usuariosRef = db.collection('Usuarios').doc(boton.id).collection('Seguidores');
+                                usuariosRef.doc(user.displayName).set({
+                                    usuarioId: user.displayName
+                                })
+                                    .then(() => {
+                                        console.log("Añadidos correctamente a seguidores");
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Comenzar a seguir',
+                                            text: 'Has comenzado a seguir '+boton.id,
+                                            width: 600
+                                        });
+                                    });
+                            });
+                    } else {
+                        querySnapshot.forEach((doc) => {
+                            usuariosRef.doc(boton.id).delete().then(() => {
+
+                                console.log("Document successfully deleted!");
+
+                                usuariosRef = db.collection('Usuarios').doc(boton.id).collection('Seguidores');
+                                usuariosRef.doc(user.displayName).delete().then(() => {
+                                    console.log("Document successfully deleted!");
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Dejar de seguir',
+                                        text: 'Has dejado de seguir a '+boton.id,
+                                        width: 600
+                                    });
+                                }).catch((error) => {
+                                    console.error("Error removing document: ", error);
+                                });
+
+
+                            }).catch((error) => {
+                                console.error("Error removing document: ", error);
+                            });
+                        });
+                    }
+
+                });
+            
+        }
+    });
+}
+
+
 
 $(document).ready(function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            var usuariosRef = db.collection('Usuarios');
+            var query = usuariosRef.where('usuarioId', '==', user.displayName)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+
+                        document.body.style.backgroundImage = 'url("' + doc.data().fondo + '")';
+                    });
+                });
+        } else {
+
+        }
+    });
     var contador2 = 0;
     var miTop = document.getElementById("miTop");
     firebase.auth().onAuthStateChanged(function (user) {
@@ -95,5 +173,13 @@ function eliminar(boton) {
                 console.error("Error removing document: ", error);
             });
         }
+    });
+}
+function cerrarSesion() {
+    firebase.auth().signOut().then(() => {
+        window.location.href = "index.html";
+        // Sign-out successful.
+    }).catch((error) => {
+        // An error happened.
     });
 }

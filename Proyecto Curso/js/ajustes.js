@@ -44,7 +44,7 @@ function cambiar(boton) {
                     .get()
                     .then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
-                            
+                            fondo="https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fcalle.jpg?alt=media&token=83db268b-59d9-44ea-9723-6f45f2dc9df7";
                             document.body.style.backgroundImage='url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fcalle.jpg?alt=media&token=83db268b-59d9-44ea-9723-6f45f2dc9df7")';
                         });
                     });
@@ -61,7 +61,7 @@ function cambiar(boton) {
                     .get()
                     .then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
-                            
+                            fondo="https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fspace.jpg?alt=media&token=bcd701fe-b968-4e6d-8f32-fecc3a18d0e6";
                             document.body.style.backgroundImage='url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fspace.jpg?alt=media&token=bcd701fe-b968-4e6d-8f32-fecc3a18d0e6")';
                         });
                     });
@@ -79,7 +79,7 @@ function cambiar(boton) {
                     .get()
                     .then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
-                            
+                            fondo="https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2FbarrioAbandonado.jpg?alt=media&token=17499d24-13a9-49bb-8904-58e000f3fe70";
                             document.body.style.backgroundImage='url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2FbarrioAbandonado.jpg?alt=media&token=17499d24-13a9-49bb-8904-58e000f3fe70")';
                         });
                     });
@@ -96,7 +96,7 @@ function cambiar(boton) {
                     .get()
                     .then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
-                            
+                            fondo="https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fbarrio.jpg?alt=media&token=efa2b41c-4c8e-46ca-800a-3046ff306a34";
                             document.body.style.backgroundImage='url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fbarrio.jpg?alt=media&token=efa2b41c-4c8e-46ca-800a-3046ff306a34")';
                         });
                     });
@@ -113,7 +113,7 @@ function cambiar(boton) {
                     .get()
                     .then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
-                            
+                            fondo="https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fatardecer.jpg?alt=media&token=b4c37afa-9635-4e54-a085-a1c6ac7f8600";
                             document.body.style.backgroundImage='url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Fatardecer.jpg?alt=media&token=b4c37afa-9635-4e54-a085-a1c6ac7f8600")';
                         });
                     });
@@ -130,7 +130,7 @@ function cambiar(boton) {
                     .get()
                     .then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
-                            
+                            fondo="https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Ftemplo.jpg?alt=media&token=d4a7047b-1883-485d-a2dd-9adde4beb1cf";
                             document.body.style.backgroundImage='url("https://firebasestorage.googleapis.com/v0/b/animezone-82466.appspot.com/o/Fondos%2Ftemplo.jpg?alt=media&token=d4a7047b-1883-485d-a2dd-9adde4beb1cf")';
                         });
                     });
@@ -200,7 +200,7 @@ function guardarCambios() {
     });
 
 }
-function cambiar(){
+function cambiarAvatar(){
     var file = document.getElementById('file-upload').files[0];
     document.getElementById('info').innerHTML = file.name;
     var storageRef = storage.ref('Fondos/' + file.name);
@@ -220,4 +220,13 @@ function cambiar(){
                 });
 
             });
+}
+
+function cerrarSesion() {
+    firebase.auth().signOut().then(() => {
+        window.location.href = "index.html";
+        // Sign-out successful.
+    }).catch((error) => {
+        // An error happened.
+    });
 }
