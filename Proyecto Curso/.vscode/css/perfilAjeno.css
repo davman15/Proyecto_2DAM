@@ -1,0 +1,17 @@
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ponerDerechaAjeno{
+    margin-left: 73%;
+}
+body::-webkit-scrollbar{
+    background-color: rgb(57, 59, 68,0.3);
+    width: 8px;
+
+}
+body::-webkit-scrollbar-thumb{
+    background: rgb(57, 59, 68,0.5);
+    border-radius: 5px;
+}
