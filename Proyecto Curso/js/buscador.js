@@ -21,7 +21,7 @@ function buscarUsuario() {
                         '<h3>' + doc.data().usuarioId + '</h3>' +
                         '</div>' +
                         '<div class="col-6 centrarBoton">' +
-                        '<button id="' + doc.data().usuarioId + '"  class="btn btn-success ms-auto">Ver Perfil</button>' +
+                        '<button id="nombre+' + doc.data().usuarioId + '"  class="btn btn-success ms-auto" onclick="perfilAjeno(this)">Ver Perfil</button>' +
                         '<button id="' + doc.data().usuarioId + '" onclick="seguir(this)" class="btn btn-dark ms-auto">Seguir</button>' +
                         '</div>' +
                         '</div>' +
@@ -182,4 +182,23 @@ function cerrarSesion() {
     }).catch((error) => {
         // An error happened.
     });
+}
+function perfilAjeno(boton) {
+    var nombre = boton.id;
+    nombre = nombre.substring(7);
+    console.log("hola");
+    if (typeof (Storage) !== 'undefined') {
+        console.log("localstorage disponible");
+    } else {
+        console.log("localstorage no disponible");
+    }
+
+
+    //guardar datos 
+    localStorage.setItem("titulo", nombre);
+
+    //recuperar elemento
+
+    console.log(localStorage.getItem("titulo"));
+    window.location.href = "perfilAjeno.html";
 }

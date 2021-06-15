@@ -128,7 +128,7 @@ $(document).ready(function () {
                             '</div>' +
                             '<div class="col-6 row ">' +
                             '<div class="col-12 ajustarUrl">' +
-                            '<a href="' + doc.data().enlaceAnimeList + '" style="color:white;"><b>Más información...</b></a><br>' +
+                            '<a href="' + doc.data().enlaceAnimeList + '" style="color:white; z-index: 10 !important;"><b>Más información...</b></a><br>' +
                             '</div>' +
                             '<div class="col-12 mt-2">' +
                             '<button id="' + contador2 + '" class="btn btn-danger" onclick="eliminar(this)">Eliminar</button>' +

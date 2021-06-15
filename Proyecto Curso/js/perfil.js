@@ -11,8 +11,8 @@ $(document).ready(function () {
                 .get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
-                        
-                        document.body.style.backgroundImage='url("'+doc.data().fondo+'")';
+
+                        document.body.style.backgroundImage = 'url("' + doc.data().fondo + '")';
                     });
                 });
         } else {
@@ -91,7 +91,7 @@ $(document).ready(function () {
                                                 '<div class="col-8 alinearDerecha box2">' +
                                                 '<img id="' + contador + '" style="width: 50px; height: 50px;" class="rounded-circle mt-3" src="' + variablePerfil + '">' +
                                                 '<div class=" nombre mr-4">' +
-                                                '<h4 class="text-light m-4" id="nombre+'+doc.data().usuarioNombre+'" onclick="perfilAjeno(this)">' + doc.data().usuarioNombre + '</h4>' +
+                                                '<h4 class="text-light m-4" id="nombre+' + doc.data().usuarioNombre + '" onclick="perfilAjeno(this)">' + doc.data().usuarioNombre + '</h4>' +
                                                 '</div>' +
                                                 '</div>' +
                                                 '<div class="col-12 alinearDerecha mb-2">' +
@@ -175,7 +175,7 @@ $(document).ready(function () {
                                                                     '<div class="col-12 alinearDerecha saltoLinea text-light">' + doc.data().texto + '</div>' +
                                                                     '</div>';
 
-                                                                document.getElementById(idDiv).insertAdjacentHTML("afterend", contenidoOpinion);
+                                                                document.getElementById(idDiv).insertAdjacentHTML("beforebegin", contenidoOpinion);
                                                                 //document.getElementById(idDivVisor).innerHTML="<h1>hola<h1>";
 
 
@@ -304,8 +304,7 @@ function añadirContactos() {
                                 });
                                 contenidoTomodachi = contenidoTomodachi + '<div class="col-2 alinearDerecha2 box2 pt-1"><img class="rounded-circle" style="width:45px; height:45px;" src="' + fotoTomodachi + '"></img></div>' +
                                     '<div class="col-10 row">' +
-                                    '<div class="col-12 mb-2"><span class="text-light"><b>' + doc.data().usuarioId + '</b></span></div>' +
-                                    '<div class="col-6 ml-0"><button class="btn btn-success">Enviar Mensaje</button></div>' +
+                                    '<div class="col-6 mb-2"><span class="text-light"><b>' + doc.data().usuarioId + '</b></span></div>' +
                                     '<div class="col-6 mr-0"><button class="btn btn-dark">Siguiendo</button></div>' +
                                     '</div>' +
                                     '<div class="col-12"><hr/></div>';
@@ -393,7 +392,7 @@ function agregarComentario(boton) {
     var idbot = boton.id + "";
     var numeroId = idbot.substring(5);
     var fechaComentario = new Date();
-
+    var fotosPerfil1 = "";
     var opinionesRef = db.collection('Publicaciones').doc(arrayPublicacion[numeroId]).collection('opiniones');
     var varlorTexto = document.getElementById(arrayInputs[numeroId]).value;
     opinionesRef.add({
@@ -406,12 +405,23 @@ function agregarComentario(boton) {
         });
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            var textComent = '<div class=" col-1 alinearDerecha2 box2 mt-2 mb-2 " style="padding-right: 50px !important;"><img class="borderFotoOp" style="width:35px; height:35px;" src="' + user.photoURL + '"></div>' +
-                '<div class="col-11 mt-2 mb-2 row" style="padding-left: 0px !important;">' +
-                '<div class="col-12 alinearDerecha"><span class="text-light" style="font-weight: bold;">' + user.displayName + '</span><div><span class="text-light" style="font-size:10px; margin-left:7px;">' + fechaComentario.toLocaleString() + '</span></div></div>' +
-                '<div class="col-12 alinearDerecha saltoLinea text-light">' + varlorTexto + '</div>' +
-                '</div>';
-            document.getElementById(arrayDivs[numeroId]).insertAdjacentHTML("afterbegin", textComent);
+            var usurioRef2 = db.collection('Usuarios');
+            var query10 = usurioRef2.where('usuarioId', '==', user.displayName)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        fotosPerfil1 = doc.data().imagen;
+                        
+                    });
+                    var textComent = '<div class=" col-1 alinearDerecha2 box2 mt-2 mb-2 " style="padding-right: 50px !important;"><img class="borderFotoOp" style="width:35px; height:35px;" src="' + fotosPerfil1 + '"></div>' +
+                        '<div class="col-11 mt-2 mb-2 row" style="padding-left: 0px !important;">' +
+                        '<div class="col-12 alinearDerecha"><span class="text-light" style="font-weight: bold;">' + user.displayName + '</span><div><span class="text-light" style="font-size:10px; margin-left:7px;">' + fechaComentario.toLocaleString() + '</span></div></div>' +
+                        '<div class="col-12 alinearDerecha saltoLinea text-light">' + varlorTexto + '</div>' +
+                        '</div>';
+                        document.getElementById(arrayDivs[numeroId]).insertAdjacentHTML("afterbegin", textComent);
+                    
+                })
+
 
         } else {
 
@@ -429,7 +439,7 @@ function darLike(boton) {
     db.collection('Publicaciones').doc(idPublicacion).get().then((doc) => {
         if (doc.data().likes.includes(firebase.auth().currentUser.displayName)) {
             arrayLikes = doc.data(firebase.auth().currentUser.displayName).likes;
-            var posicionArray=arrayLikes.indexOf(firebase.auth().currentUser.displayName);
+            var posicionArray = arrayLikes.indexOf(firebase.auth().currentUser.displayName);
             console.log(posicionArray);
             arrayLikes.splice(posicionArray, 1);
             db.collection("Publicaciones").doc(idPublicacion).update({
@@ -464,21 +474,21 @@ function cerrarSesion() {
     });
 }
 function perfilAjeno(boton) {
-    var nombre=boton.id;
-    nombre=nombre.substring(7);
+    var nombre = boton.id;
+    nombre = nombre.substring(7);
     console.log("hola");
-    if (typeof(Storage)!=='undefined') {
+    if (typeof (Storage) !== 'undefined') {
         console.log("localstorage disponible");
-    }else{
+    } else {
         console.log("localstorage no disponible");
     }
-    
-    
+
+
     //guardar datos 
-    localStorage.setItem("titulo",nombre);
-    
+    localStorage.setItem("titulo", nombre);
+
     //recuperar elemento
-    
+
     console.log(localStorage.getItem("titulo"));
     window.location.href = "perfilAjeno.html";
 }
